@@ -1,0 +1,41 @@
+-- USERS TABLE
+CREATE TABLE IF NOT EXISTS users (
+  id CHAR(36) PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- PROJECTS TABLE
+CREATE TABLE IF NOT EXISTS projects (
+  id CHAR(36) PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  description TEXT,
+  owner_id CHAR(36) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (owner_id) REFERENCES users(id)
+);
+
+-- TASKS TABLE
+CREATE TABLE IF NOT EXISTS tasks (
+  id CHAR(36) PRIMARY KEY,
+  project_id CHAR(36) NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  description TEXT,
+  status ENUM('todo', 'in_progress', 'done') DEFAULT 'todo',
+  assigned_to CHAR(36),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (project_id) REFERENCES projects(id),
+  FOREIGN KEY (assigned_to) REFERENCES users(id)
+);
+
+-- COMMENTS TABLE
+CREATE TABLE IF NOT EXISTS comments (
+  id CHAR(36) PRIMARY KEY,
+  task_id CHAR(36) NOT NULL,
+  user_id CHAR(36) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (task_id) REFERENCES tasks(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
