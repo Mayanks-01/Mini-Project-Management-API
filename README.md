@@ -5,9 +5,9 @@ A simple Node.js + MySQL REST API for managing Users, Projects, Tasks, and Comme
 Tech Stack: Node.js (Express), MySQL (mysql2/promise), UUID, dotenv
 
 Installation:
-git clone https://github.com/Mayanks-01/Mini-Project-Management-API
-cd Mini-Project-Management-API
-npm install
+1. git clone https://github.com/Mayanks-01/Mini-Project-Management-API
+2. cd Mini-Project-Management-API
+3. npm install
 
 Setup:
 
